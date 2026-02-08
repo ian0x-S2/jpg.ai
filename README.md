@@ -1,42 +1,40 @@
-# sv
+# Svelte Image Processing App
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A SvelteKit application for AI-powered image processing featuring background removal and image upscaling capabilities.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Background removal using AI
+- Image upscaling with neural networks
+- Real-time processing in web workers
+- Responsive SvelteKit interface
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Development
 
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-bun x sv create --template minimal --types ts --add prettier eslint tailwindcss="plugins:typography,forms" sveltekit-adapter="adapter:auto" devtools-json mdsvex mcp="ide:gemini,opencode,vscode,other+setup:remote" --install bun my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Install dependencies and start the development server:
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun install
+bun run dev
 ```
 
 ## Building
 
-To create a production version of your app:
+Create a production build:
 
 ```sh
-npm run build
+bun run build
 ```
 
-You can preview the production build with `npm run preview`.
+Preview the production build:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```sh
+bun run preview
+```
+
+## Technologies
+
+- SvelteKit
+- TypeScript
+- Web Workers for background processing
+- Tailwind CSS for styling
