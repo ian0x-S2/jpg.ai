@@ -28,7 +28,7 @@ self.onmessage = async (event) => {
 		const img = outputs[0].rgba();
 
 		// Send the final result (already in the correct RGBA format)
-		self.postMessage({
+		(self as any).postMessage({
 			type: 'complete',
 			output: { data: img.data, width: img.width, height: img.height }
 		}, [img.data.buffer]);

@@ -1,4 +1,4 @@
-import { pipeline, RawImage } from '@huggingface/transformers';
+import { pipeline } from '@huggingface/transformers';
 
 let upscaler: any = null;
 
@@ -22,14 +22,17 @@ self.onmessage = async (event) => {
 		// Ensure we send back the pixel data in RGBA format
 		const img = (Array.isArray(output) ? output[0] : output).rgba();
 
-		self.postMessage({
-			type: 'complete',
-			output: {
-				data: img.data,
-				width: img.width,
-				height: img.height
-			}
-		}, [img.data.buffer]);
+		(self as any).postMessage(
+			{
+				type: 'complete',
+				output: {
+					data: img.data,
+					width: img.width,
+					height: img.height
+				}
+			},
+			[img.data.buffer]
+		);
 	} catch (e) {
 		const errorMessage = e instanceof Error ? e.message : String(e);
 		self.postMessage({ type: 'error', error: errorMessage });
