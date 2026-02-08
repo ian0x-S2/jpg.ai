@@ -142,7 +142,7 @@
 
 	<header class="border-b border-white bg-black">
 		<div class="flex items-center justify-between bg-white px-2 py-1 font-bold text-black">
-			<span class="text-xs tracking-[0.2em] uppercase">AI-IMAGE-TOOLS // SYSTEM.V1</span>
+			<span class="text-xs tracking-[0.2em] uppercase">JPG.AI</span>
 			<div class="flex gap-4">
 				<span class="cursor-default">[ _ ]</span>
 				<span class="flex cursor-default items-center justify-center text-xs"> [ □ ] </span>
@@ -154,9 +154,7 @@
 		</div>
 		<nav class="flex gap-6 px-4 py-1.5 text-[10px] font-bold tracking-widest uppercase">
 			<span class="cursor-pointer underline decoration-1 underline-offset-4">01.FILE</span>
-			<span class="cursor-pointer opacity-40 hover:underline hover:opacity-100">02.EDIT</span>
-			<span class="cursor-pointer opacity-40 hover:underline hover:opacity-100">03.VIEW</span>
-			<span class="cursor-pointer opacity-40 hover:underline hover:opacity-100">04.HELP</span>
+			<a href="/help" class="cursor-pointer opacity-40 hover:underline hover:opacity-100">02.HELP</a>
 		</nav>
 	</header>
 
@@ -164,13 +162,13 @@
 		{#if !selectedFile}
 			<div class="mx-auto mt-12 max-w-3xl text-center">
 				<pre
-					class="mb-12 text-[min(1vw,0.55rem)] leading-[1.1] whitespace-pre text-white opacity-90">
- █████╗ ██╗     ██╗███╗   ███╗ █████╗  ██████╗ ███████╗
-██╔══██╗██║     ██║████╗ ████║██╔══██╗██╔════╝ ██╔════╝
-███████║██║     ██║██╔████╔██║███████║██║  ███╗█████╗  
-██╔══██║██║     ██║██║╚██╔╝██║██╔══██║██║   ██║██╔══╝  
-██║  ██║███████╗██║██║ ╚═╝ ██║██║  ██║╚██████╔╝███████╗
-╚═╝  ╚═╝╚══════╝╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+					class="mb-12 text-[min(1.2vw,0.7rem)] leading-[1.1] whitespace-pre text-white opacity-90">
+      ██╗██████╗  ██████╗      █████╗ ██╗
+      ██║██╔══██╗██╔════╝     ██╔══██╗██║
+      ██║██████╔╝██║  ███╗    ███████║██║
+ ██   ██║██╔═══╝ ██║   ██║    ██╔══██║██║
+ ╚█████╔╝██║     ╚██████╔╝    ██║  ██║██║
+  ╚════╝ ╚═╝      ╚═════╝     ╚═╝  ╚═╝╚═╝
                 &gt;&gt; NEURAL IMAGE INTERFACE &lt;&lt;</pre>
 				<div
 					class="mb-10 inline-block border border-white/20 bg-white/5 px-12 py-4 backdrop-blur-sm"
