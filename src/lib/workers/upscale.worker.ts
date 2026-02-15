@@ -1,6 +1,8 @@
 import { pipeline } from '@huggingface/transformers';
+import { getComputeDevice } from './device';
 
 let upscaler: any = null;
+let device: 'cpu' | 'webgpu' | 'wasm' = 'wasm';
 
 self.onmessage = async (event) => {
 	const image = event.data;
@@ -9,7 +11,10 @@ self.onmessage = async (event) => {
 		self.postMessage({ type: 'progress', stage: 'initializing', progress: 40 });
 
 		if (!upscaler) {
-			upscaler = await pipeline('image-to-image', 'Xenova/2x_APISR_RRDB_GAN_generator-onnx');
+			device = await getComputeDevice();
+			upscaler = await pipeline('image-to-image', 'Xenova/2x_APISR_RRDB_GAN_generator-onnx', {
+				device: device
+			});
 		}
 
 		self.postMessage({ type: 'progress', stage: 'processing', progress: 70 });

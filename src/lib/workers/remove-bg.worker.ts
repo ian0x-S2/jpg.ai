@@ -1,8 +1,9 @@
 // src/lib/worker/background-remover.worker.ts
 import { pipeline } from '@huggingface/transformers';
+import { getComputeDevice } from './device';
 
-// Cache the pipeline to avoid reloading it for each image
 let remover: any = null;
+let device: 'cpu' | 'webgpu' | 'wasm' = 'wasm';
 
 self.onmessage = async (event) => {
 	const imageFile = event.data;
@@ -12,9 +13,12 @@ self.onmessage = async (event) => {
 
 		self.postMessage({ type: 'progress', stage: 'initializing', progress: 40 });
 
-		// Load the pipeline if it has not been loaded yet
+		// Detect compute device and load the pipeline if it has not been loaded yet
 		if (!remover) {
-			remover = await pipeline('background-removal', 'briaai/RMBG-1.4');
+			device = await getComputeDevice();
+			remover = await pipeline('background-removal', 'briaai/RMBG-1.4', {
+				device: device
+			});
 		}
 
 		// Send progress message
@@ -28,13 +32,15 @@ self.onmessage = async (event) => {
 		const img = outputs[0].rgba();
 
 		// Send the final result (already in the correct RGBA format)
-		(self as any).postMessage({
-			type: 'complete',
-			output: { data: img.data, width: img.width, height: img.height }
-		}, [img.data.buffer]);
+		(self as any).postMessage(
+			{
+				type: 'complete',
+				output: { data: img.data, width: img.width, height: img.height }
+			},
+			[img.data.buffer]
+		);
 	} catch (e) {
 		const errorMessage = e instanceof Error ? e.message : String(e);
 		self.postMessage({ type: 'error', error: errorMessage });
 	}
 };
-
